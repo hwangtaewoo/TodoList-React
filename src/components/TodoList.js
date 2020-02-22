@@ -1,12 +1,20 @@
-import React, { Component } from "react";
-import TodoItem from "./TodoItem";
+import React, { Component } from 'react';
+import TodoItem from './TodoItem';
+import styled from 'styled-components';
 
-class FormItem extends Component {
+const ListWrapper = styled.div`
+  width: 100%;
 
-  shouldComponentUpdate(nextProps, nextState) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+class TodoList extends Component {
+  shouldComponentUpdate(nextProps) {
     return this.props.todos !== nextProps.todos;
   }
-  
+
   render() {
     const { todos, onToggle, onRemove } = this.props;
 
@@ -21,8 +29,8 @@ class FormItem extends Component {
       />
     ));
 
-    return <div>{todoList}</div>;
+    return <ListWrapper>{todoList}</ListWrapper>;
   }
 }
 
-export default FormItem;
+export default TodoList;

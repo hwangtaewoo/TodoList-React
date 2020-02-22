@@ -1,23 +1,29 @@
-import React, { Component } from "react";
-import "./TodoItem.css";
-import styled from "styled-components";
+import React, { Component } from 'react';
+import styled, { css } from 'styled-components';
 
-const TodoItem = styled.div`
+const TodoItemWrapper = styled.div`
   padding-left: 1rem;
   width: 60%;
   display: flex;
-  margin-left: 3.5rem;
-  margin-bottom: 2.5%;
+  margin-bottom: 1rem;
   align-items: center;
   cursor: pointer;
   background-color: #4470ff;
   border-radius: 10px 10px 10px 10px;
 `;
 
-const TodoText = styled.div`
+const TodoText = styled.span`
   flex: 1;
   word-break: break-all;
   color: white;
+
+  ${({ checked }) =>
+    checked &&
+    css`
+      text-decoration: line-through;
+      text-decoration-color: #495057;
+      opacity: 0.7;
+    `}
 `;
 
 const Remove = styled.div`
@@ -26,9 +32,8 @@ const Remove = styled.div`
   font-size: 2rem;
 `;
 
-class Todo extends Component {
-
-  shouldComponentUpdate(nextProps, nextState) {
+class TodoItem extends Component {
+  shouldComponentUpdate(nextProps) {
     return this.props.checked !== nextProps.checked;
   }
 
@@ -36,25 +41,21 @@ class Todo extends Component {
     const { text, checked, id, onToggle, onRemove } = this.props;
 
     return (
-      <>
-        <TodoItem onClick={() => onToggle(id)}>
-          <TodoText className={`todo-text ${checked && "checked"}`}>
-            <div>{text}</div>
-          </TodoText>
-          <Remove
-            onClick={e => {
-              e.stopPropagation();
-              onRemove(id);
-            }}
-          >
-            &times;
-          </Remove>
-        </TodoItem>
-        <TodoItem>
-        </TodoItem>
-      </>
+      <TodoItemWrapper onClick={() => onToggle(id)}>
+        <TodoText checked={checked}>
+          <div>{text}</div>
+        </TodoText>
+        <Remove
+          onClick={e => {
+            e.stopPropagation();
+            onRemove(id);
+          }}
+        >
+          &times;
+        </Remove>
+      </TodoItemWrapper>
     );
   }
 }
 
-export default Todo;
+export default TodoItem;
