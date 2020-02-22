@@ -11,9 +11,8 @@ const TodoList = styled.div`
 `;
 
 const FormWrapper = styled.div`
-  width: 85%;
-
-  margin-left: 1.5rem;
+  display: flex;
+  justify-content: center;
   padding: 1rem;
 `;
 
@@ -21,7 +20,7 @@ const Template = ({ form, children }) => {
   return (
     <TodoList>
       <FormWrapper>{form}</FormWrapper>
-      {children}
+      {children} 
     </TodoList>
   );
 };

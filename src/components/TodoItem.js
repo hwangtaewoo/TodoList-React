@@ -7,6 +7,7 @@ const TodoItem = styled.div`
   width: 60%;
   display: flex;
   margin-left: 3.5rem;
+  margin-bottom: 2.5%;
   align-items: center;
   cursor: pointer;
   background-color: #4470ff;
@@ -25,11 +26,12 @@ const Remove = styled.div`
   font-size: 2rem;
 `;
 
-const NULL = styled.div`
-  padding: 10px;
-`;
-
 class Todo extends Component {
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props.checked !== nextProps.checked;
+  }
+
   render() {
     const { text, checked, id, onToggle, onRemove } = this.props;
 
@@ -48,7 +50,8 @@ class Todo extends Component {
             &times;
           </Remove>
         </TodoItem>
-        <NULL />
+        <TodoItem>
+        </TodoItem>
       </>
     );
   }

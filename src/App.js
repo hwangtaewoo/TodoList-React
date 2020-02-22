@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Form from "./components/Form";
 import Template from "./components/Template";
-import FormItem from "./components/FormItem";
+import FormItem from "./components/TodoList";
 
 class App extends Component {
   id = 3;
